@@ -7648,6 +7648,7 @@ class ImageProcessingView(TemplateView):
             'IMAGE_BORDER__RIGHT'            : self.indi_allsky_config.get('IMAGE_BORDER', {}).get('RIGHT', 0),
             'IMAGE_BORDER__BOTTOM'           : self.indi_allsky_config.get('IMAGE_BORDER', {}).get('BOTTOM', 0),
             'RUN_DETECTION'                  : False,
+            'DETECT_STARS_METHOD'            : self.indi_allsky_config.get('DETECT_STARS_METHOD', 'template'),
             'DETECT_STARS_THOLD'             : self.indi_allsky_config.get('DETECT_STARS_THOLD', 0.6),
             'DETECT_STARS_SEP_THOLD'         : self.indi_allsky_config.get('DETECT_STARS_SEP_THOLD', 5.0),
             'DETECT_METEORS_THOLD'           : self.indi_allsky_config.get('DETECT_METEORS_THOLD', 125),
@@ -8224,6 +8225,7 @@ class JsonImageProcessingView(JsonView):
             from ..starsSep import IndiAllSkyStarsSEP
             from ..detectLines import IndiAllskyDetectLines
 
+            p_config['DETECT_STARS_METHOD']    = str(request.json.get('DETECT_STARS_METHOD', 'template'))
             p_config['DETECT_STARS_THOLD']     = float(request.json['DETECT_STARS_THOLD'])
             p_config['DETECT_STARS_SEP_THOLD'] = float(request.json['DETECT_STARS_SEP_THOLD'])
             p_config['DETECT_METEORS_THOLD']   = int(request.json['DETECT_METEORS_THOLD'])
