@@ -2342,6 +2342,8 @@ function hour_change(json_data) {
             fields['FITS_ID'].input.val(fields['IMG_SELECT'].input.val());
 
             $("#loader_filter").css({'display' : 'none'});
+
+            if (fields['FITS_ID'].input.val()) { submitProcessingData(); }
         },
         error: function(rdata){
             Object.keys(rdata).forEach((key) => {
@@ -2396,6 +2398,8 @@ function day_change(json_data) {
             fields['FITS_ID'].input.val(fields['IMG_SELECT'].input.val());
 
             $("#loader_filter").css({'display' : 'none'});
+
+            if (fields['FITS_ID'].input.val()) { submitProcessingData(); }
         },
         error: function(rdata){
             Object.keys(rdata).forEach((key) => {
@@ -2454,6 +2458,8 @@ function month_change(json_data) {
             fields['FITS_ID'].input.val(fields['IMG_SELECT'].input.val());
 
             $("#loader_filter").css({'display' : 'none'});
+
+            if (fields['FITS_ID'].input.val()) { submitProcessingData(); }
         },
         error: function(rdata){
             Object.keys(rdata).forEach((key) => {
@@ -2517,7 +2523,11 @@ function year_change(json_data, on_complete) {
 
             $("#loader_filter").css({'display' : 'none'});
 
-            if (on_complete) { on_complete(); }
+            if (on_complete) {
+                on_complete();
+            } else if (fields['FITS_ID'].input.val()) {
+                submitProcessingData();
+            }
         },
         error: function(rdata){
             Object.keys(rdata).forEach((key) => {
